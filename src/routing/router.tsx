@@ -9,6 +9,7 @@ import BrowseRestaurantsPage from '../pages/customer/browse';
 import NotFoundPage from '../pages/404';
 import CreateRestaurantPage from '../pages/restaurant/create';
 import ProtectedRoute from './protectedroute';
+import ManageRestaurantPage from '@/pages/restaurant/manage';
 
 const router = createBrowserRouter([
   { index: true, Component: IndexPage },
@@ -23,11 +24,16 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: 'r',
     Component: ProtectedRoute,
     children: [
-      { index: true, Component: CreateRestaurantPage },
-      { path: 'new', Component: CreateRestaurantPage },
+      {
+        path: 'r',
+        Component: DefaultLayout,
+        children: [
+          { index: true, Component: ManageRestaurantPage },
+          { path: 'new', Component: CreateRestaurantPage },
+        ],
+      },
     ],
   },
   { path: '*', Component: NotFoundPage },
