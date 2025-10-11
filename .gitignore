@@ -26,3 +26,4 @@ dist-ssr
 .devcontainer
 .temp
 .pnpm-store
+.env

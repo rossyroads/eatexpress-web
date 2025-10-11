@@ -26,11 +26,11 @@ function CardChoice(props: {
       <CardFooter className="before:bg-white/10 border-white/20 overflow-hidden absolute before:rounded-xl rounded-large w-full shadow-small z-10 h-full justify-center">
         {isHovering ? (
           <Button
-            className="text-large text-white bg-black/20"
-            color="default"
+            className="text-white"
+            color="primary"
             radius="lg"
             size="lg"
-            variant="flat"
+            variant="solid"
             onPress={() => navigate(props.pathToNavigate)}
           >
             {props.buttonText}

@@ -8,12 +8,12 @@ function App() {
         <div className="flex justify-evenly items-center h-72">
           <CardChoice
             pathToImage="/foodphotos/chinese_red_pork.jpg"
-            pathToNavigate={'basket'}
+            pathToNavigate={'c'}
             buttonText={"I'm ordering"}
           />
           <CardChoice
             pathToImage="/foodphotos/cake_making.jpg"
-            pathToNavigate={'basket'}
+            pathToNavigate={'r'}
             buttonText={"I'm cooking"}
           />
         </div>
