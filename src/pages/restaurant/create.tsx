@@ -1,11 +1,10 @@
-import { useAuth } from 'react-oidc-context';
+import NewRestaurantForm from '@/components/forms/new-restaurant';
 
 function CreateRestaurantPage() {
-  const auth = useAuth();
   return (
-    <div>
-      Hello {auth.user?.profile.sub}{' '}
-      <button onClick={() => void auth.removeUser()}>Log out</button>
+    <div className="flex flex-col">
+      <div className="text-3xl text-center pb-10">Add Your Restaurant</div>
+      <NewRestaurantForm />
     </div>
   );
 }
