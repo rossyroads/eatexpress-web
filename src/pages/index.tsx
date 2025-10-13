@@ -1,4 +1,4 @@
-import CardChoice from '@/components/card';
+import CardChoice from '@/components/card-choice';
 
 function App() {
   return (

@@ -1,9 +1,11 @@
-import { HeroUIProvider } from '@heroui/react';
+import { HeroUIProvider, ToastProvider } from '@heroui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { IconoirProvider } from 'iconoir-react';
 
 import { AuthProvider } from 'react-oidc-context';
-import { onSigninCallback, userManager } from './utils/keycloak';
+import { onSigninCallback, userManager } from './config/oidc';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { iconProps } from './config/iconoir';
 
 function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
@@ -14,17 +16,10 @@ function Providers({ children }: { children: React.ReactNode }) {
         onSigninCallback={onSigninCallback}
       >
         <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
           <HeroUIProvider>
-            <IconoirProvider
-              iconProps={{
-                color: '#AAAAAA',
-                strokeWidth: 1,
-                width: '1em',
-                height: '1em',
-              }}
-            >
-              {children}
-            </IconoirProvider>
+            <ToastProvider placement="top-center" />
+            <IconoirProvider iconProps={iconProps}>{children}</IconoirProvider>
           </HeroUIProvider>
         </QueryClientProvider>
       </AuthProvider>
