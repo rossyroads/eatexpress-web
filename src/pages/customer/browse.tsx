@@ -1,5 +1,5 @@
 function BrowseRestaurantsPage() {
-  return <>hi</>;
+  return <>browse</>;
 }
 
 export default BrowseRestaurantsPage;
