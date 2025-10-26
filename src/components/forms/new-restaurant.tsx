@@ -1,53 +1,55 @@
 import { Form, Input, Checkbox, Button, addToast } from '@heroui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import AddressFormPart from './address';
 import { useCreateRestaurant } from '@/hooks/useRestaurant';
-import type { TNewRestaurant, TRestaurant } from '@/api/restaurant';
+import type { TDailySchedule } from '@/api/restaurant';
 import SelectCuisineType from './cuisine-type';
-import ScheduleTableForm from './schedule';
+import ScheduleTableForm from '@/components/schedule/schedule';
+import { useNavigate } from 'react-router-dom';
+import type { AxiosError } from 'axios';
 
-const openingHours = [
+const scheduleTemplate: TDailySchedule[] = [
   {
     dayOfWeek: 'MONDAY',
-    timeFrom: '09:00:00',
-    timeTo: '17:00:00',
-    closedAllDay: 'false',
+    timeFrom: '00:00:00',
+    timeTo: '00:00:00',
+    closedAllDay: true,
   },
   {
     dayOfWeek: 'TUESDAY',
-    timeFrom: '09:00:00',
-    timeTo: '17:00:00',
-    closedAllDay: 'false',
+    timeFrom: '00:00:00',
+    timeTo: '00:00:00',
+    closedAllDay: true,
   },
   {
     dayOfWeek: 'WEDNESDAY',
-    timeFrom: '09:00:00',
-    timeTo: '17:00:00',
-    closedAllDay: 'false',
+    timeFrom: '00:00:00',
+    timeTo: '00:00:00',
+    closedAllDay: true,
   },
   {
     dayOfWeek: 'THURSDAY',
-    timeFrom: '09:00:00',
-    timeTo: '17:00:00',
-    closedAllDay: 'false',
+    timeFrom: '00:00:00',
+    timeTo: '00:00:00',
+    closedAllDay: true,
   },
   {
     dayOfWeek: 'FRIDAY',
-    timeFrom: '09:00:00',
-    timeTo: '17:00:00',
-    closedAllDay: 'false',
+    timeFrom: '00:00:00',
+    timeTo: '00:00:00',
+    closedAllDay: true,
   },
   {
     dayOfWeek: 'SATURDAY',
-    timeFrom: '09:00:00',
-    timeTo: '12:00:00',
-    closedAllDay: 'false',
+    timeFrom: '00:00:00',
+    timeTo: '00:00:00',
+    closedAllDay: true,
   },
   {
     dayOfWeek: 'SUNDAY',
     timeFrom: '00:00:00',
     timeTo: '00:00:00',
-    closedAllDay: 'true',
+    closedAllDay: true,
   },
 ];
 
@@ -60,15 +62,14 @@ type Errors = {
 };
 
 export default function NewRestaurantForm() {
-  const [submitted, setSubmitted] = React.useState<TRestaurant | null>(null);
+  const navigate = useNavigate();
   const [errors, setErrors] = React.useState<Errors>({});
   const { submitRestaurant } = useCreateRestaurant();
+  const [scheduleItems, setScheduleItems] =
+    useState<TDailySchedule[]>(scheduleTemplate);
 
   // Real-time validation
-  const onSubmit = async (e: {
-    preventDefault: () => void;
-    currentTarget: HTMLFormElement | undefined;
-  }) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget));
     console.log(data);
@@ -90,17 +91,26 @@ export default function NewRestaurantForm() {
       return;
     }
 
-    data.openingHours = openingHours;
+    // @ts-ignore
+    data.openingHours = scheduleItems;
 
     // Clear errors and submit
     setErrors({});
     try {
-      const a = await submitRestaurant(data as unknown as TNewRestaurant);
-      setSubmitted(a);
-    } catch {
+      // @ts-ignore
+      const newRestaurant = await submitRestaurant(data);
+      if (newRestaurant) {
+        addToast({
+          title: 'Restaurant created successfully',
+          color: 'success',
+        });
+        navigate('/r');
+      }
+    } catch (e) {
       addToast({
         title: 'Error creating restaurant',
-        description: 'Please try again',
+        // @ts-ignore
+        description: e.response.data.detail,
         color: 'danger',
       });
     }
@@ -110,11 +120,12 @@ export default function NewRestaurantForm() {
     <Form
       className="w-full justify-center items-center space-y-4"
       validationErrors={errors}
-      onReset={() => setSubmitted(null)}
+      onReset={() => {
+        setScheduleItems(scheduleTemplate);
+      }}
       onSubmit={onSubmit}
     >
       <div className="flex flex-col gap-4 max-w-md">
-        <ScheduleTableForm dailySchedule={openingHours} />
         <Input
           isRequired
           errorMessage={({ validationDetails }) => {
@@ -187,6 +198,11 @@ export default function NewRestaurantForm() {
           type="number"
         />
 
+        <ScheduleTableForm
+          scheduleItems={scheduleItems}
+          setScheduleItems={setScheduleItems}
+        />
+
         <Checkbox
           isRequired
           classNames={{
@@ -216,12 +232,6 @@ export default function NewRestaurantForm() {
           </Button>
         </div>
       </div>
-
-      {submitted && (
-        <div className="text-small text-default-500 mt-4">
-          Submitted data: <pre>{JSON.stringify(submitted, null, 2)}</pre>
-        </div>
-      )}
     </Form>
   );
 }

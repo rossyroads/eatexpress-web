@@ -10,7 +10,7 @@ function SelectCuisineType() {
       <>
         <div className="text-small truncate">Cuisine type*</div>
         <Skeleton className="rounded-lg">
-          <div className="h-10 rounded-lg bg-secondary" />
+          <div className="h-10 rounded-lg bg-secondary w-full" />
         </Skeleton>
       </>
     );
@@ -20,7 +20,6 @@ function SelectCuisineType() {
     <>
       <Select
         isRequired
-        className="max-w-xs"
         label="Cuisine type"
         labelPlacement="outside"
         name="cuisineType"
