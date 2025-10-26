@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export type TDailySchedule = {
   dayOfWeek: string;
-  timeFrom: Date;
-  timeTo: Date;
+  timeFrom: string;
+  timeTo: string;
   closedAllDay: boolean;
 };
 export type TNewRestaurant = {
@@ -25,45 +25,26 @@ export type TRestaurant = TNewRestaurant & {
   openingStatusOverride: string;
 };
 
-export async function getRestaurantByOwnerId(
-  token: string,
-  ownerId: string
-): Promise<TRestaurant> {
+export async function getRestaurantByOwner(): Promise<TRestaurant> {
   const { data } = await axios.get<TRestaurant>(
-    `${import.meta.env.VITE_BACKEND_HOST}/api/${import.meta.env.VITE_BACKEND_API_VERSION}/restaurant/${ownerId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
+    `${import.meta.env.VITE_BACKEND_HOST}/api/${import.meta.env.VITE_BACKEND_API_VERSION}/restaurant`
   );
   return data;
 }
 
 export async function createRestaurant(
-  token: string,
   newRestaurant: TNewRestaurant
 ): Promise<TRestaurant> {
   const { data } = await axios.post<TRestaurant>(
     `${import.meta.env.VITE_BACKEND_HOST}/api/${import.meta.env.VITE_BACKEND_API_VERSION}/restaurant/create`,
-    newRestaurant,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
+    newRestaurant
   );
   return data;
 }
 
-export async function getCuisineTypes(token: string): Promise<String[]> {
+export async function getCuisineTypes(): Promise<String[]> {
   const { data } = await axios.get<String[]>(
-    `${import.meta.env.VITE_BACKEND_HOST}/api/${import.meta.env.VITE_BACKEND_API_VERSION}/restaurant/cuisine-types`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
+    `${import.meta.env.VITE_BACKEND_HOST}/api/${import.meta.env.VITE_BACKEND_API_VERSION}/public/restaurant/cuisine-types`
   );
   return data;
 }

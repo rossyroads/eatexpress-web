@@ -8,7 +8,7 @@ import PrivacyPage from '../pages/privacy';
 import BrowseRestaurantsPage from '../pages/customer/browse';
 import NotFoundPage from '../pages/404';
 import CreateRestaurantPage from '../pages/restaurant/create';
-import ProtectedRoute from './protectedroute';
+import { RouteGuard } from './protectedroute';
 import { ManageRestaurantPage } from '@/pages/restaurant/manage';
 
 const router = createBrowserRouter([
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    Component: ProtectedRoute,
+    Component: RouteGuard,
     children: [
       {
         path: 'r',
