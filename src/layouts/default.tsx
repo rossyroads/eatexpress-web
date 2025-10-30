@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 export default function DefaultLayout() {
   const year = new Date().getFullYear();
   return (
-    <div className="relative flex flex-col h-screen">
+    <div className="relative flex flex-col h-screen  px-6">
       <Navbar />
       <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
         <Outlet />
