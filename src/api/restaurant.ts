@@ -6,16 +6,23 @@ export type TDailySchedule = {
   timeTo: string;
   closedAllDay: boolean;
 };
+export type TAddress = {
+  street: string;
+  houseNumber: string;
+  flatNumber: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+  latitude: number;
+  longitude: number;
+};
 export type TNewRestaurant = {
   name: string;
   cuisineType: string;
   contactEmail: string;
   pictureUrl: string;
-  street: string;
-  street_number: number;
-  postalCode: string;
-  city: string;
-  country: string;
+  address: TAddress;
   defaultPreparationTimeMinutes: number;
   openingHours: TDailySchedule[];
 };
