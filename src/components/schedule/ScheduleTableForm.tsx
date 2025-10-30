@@ -11,7 +11,7 @@ import {
 } from '@heroui/react';
 import { useCallback, useState } from 'react';
 import { Edit } from 'iconoir-react';
-import SchedulePickerModal from './schedule-picker';
+import SchedulePickerModal from './SchedulePickerModal';
 import type { TDailySchedule } from '@/api/restaurant';
 import { capitalize } from '@/lib/utils';
 
@@ -76,7 +76,8 @@ function ScheduleTableForm({
               <Tooltip content="Edit user">
                 <button
                   className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     console.log(columnKey);
                     onOpen();
                     setItemOpen(item);

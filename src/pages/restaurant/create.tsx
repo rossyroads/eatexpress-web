@@ -1,4 +1,4 @@
-import NewRestaurantForm from '@/components/forms/new-restaurant';
+import NewRestaurantForm from '@/components/forms/NewRestaurantForm';
 
 function CreateRestaurantPage() {
   return (

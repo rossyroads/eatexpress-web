@@ -1,6 +1,6 @@
 import { Input, Select, SelectItem } from '@heroui/react';
 
-function AddressFormPart() {
+function AddressForm() {
   return (
     <>
       <Input
@@ -62,14 +62,13 @@ function AddressFormPart() {
         name="country"
         placeholder="Select country"
       >
-        <SelectItem key="ar">Argentina</SelectItem>
-        <SelectItem key="us">United States</SelectItem>
-        <SelectItem key="ca">Canada</SelectItem>
-        <SelectItem key="uk">United Kingdom</SelectItem>
-        <SelectItem key="au">Australia</SelectItem>
+        <SelectItem key="Belgium">Belgium</SelectItem>
+        <SelectItem key="France">France</SelectItem>
+        <SelectItem key="Netherlands">Netherlands</SelectItem>
+        <SelectItem key="United Kingdom">United Kingdom</SelectItem>
       </Select>
     </>
   );
 }
 
-export default AddressFormPart;
+export default AddressForm;

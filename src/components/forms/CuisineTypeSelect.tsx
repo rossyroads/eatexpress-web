@@ -2,7 +2,7 @@ import { useCuisineTypes } from '@/hooks/useRestaurant';
 import { Select, SelectItem, Skeleton } from '@heroui/react';
 import type { Key } from 'react';
 
-function SelectCuisineType() {
+function CuisineTypeSelect() {
   const { isLoading, isError, data } = useCuisineTypes();
 
   if (isLoading || isError || data == undefined) {
@@ -33,4 +33,4 @@ function SelectCuisineType() {
   );
 }
 
-export default SelectCuisineType;
+export default CuisineTypeSelect;

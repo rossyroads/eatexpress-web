@@ -1,12 +1,11 @@
 import { Form, Input, Checkbox, Button, addToast } from '@heroui/react';
 import React, { useState } from 'react';
-import AddressFormPart from './address';
+import AddressForm from './AddressForm';
 import { useCreateRestaurant } from '@/hooks/useRestaurant';
 import type { TDailySchedule } from '@/api/restaurant';
-import SelectCuisineType from './cuisine-type';
-import ScheduleTableForm from '@/components/schedule/schedule';
+import CuisineTypeSelect from './CuisineTypeSelect';
+import ScheduleTableForm from '@/components/schedule/ScheduleTableForm';
 import { useNavigate } from 'react-router-dom';
-import type { AxiosError } from 'axios';
 
 const scheduleTemplate: TDailySchedule[] = [
   {
@@ -158,9 +157,9 @@ export default function NewRestaurantForm() {
           type="email"
         />
 
-        <AddressFormPart />
+        <AddressForm />
 
-        <SelectCuisineType />
+        <CuisineTypeSelect />
 
         <Input
           isRequired
