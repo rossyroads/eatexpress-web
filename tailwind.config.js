@@ -16,5 +16,5 @@ module.exports = {
     extend: {},
   },
   darkMode: 'class',
-  plugins: [heroui(modernTheme)],
+  plugins: [heroui(coffeeTheme)],
 };
