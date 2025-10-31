@@ -8,18 +8,10 @@ import {
   useDisclosure,
   Image,
   Button,
-  Link,
 } from '@heroui/react';
 import StatusChip from '@/components/status-chip';
 
-import {
-  Cutlery,
-  Edit,
-  InfoCircle,
-  Mail,
-  Plus,
-  PlusCircle,
-} from 'iconoir-react';
+import { Cutlery, Edit, InfoCircle, PlusCircle } from 'iconoir-react';
 import RestaurantDetails from './RestaurantDetails';
 
 interface IRestaurantOverview {

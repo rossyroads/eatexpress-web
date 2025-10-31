@@ -1,6 +1,5 @@
-import { Link } from '@heroui/link';
-
 import { Navbar } from '@/components/navbar';
+import { Link } from '@heroui/react';
 import { Outlet } from 'react-router-dom';
 
 export default function DefaultLayout() {

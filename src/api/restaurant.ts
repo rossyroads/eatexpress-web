@@ -49,8 +49,8 @@ export async function createRestaurant(
   return data;
 }
 
-export async function getCuisineTypes(): Promise<String[]> {
-  const { data } = await axios.get<String[]>(
+export async function getCuisineTypes(): Promise<string[]> {
+  const { data } = await axios.get<string[]>(
     `${import.meta.env.VITE_BACKEND_HOST}/api/${import.meta.env.VITE_BACKEND_API_VERSION}/public/restaurant/cuisine-types`
   );
   return data;

@@ -9,7 +9,7 @@ export function RouteGuard() {
     if (isInitialised && !isAuthenticated()) {
       login();
     }
-  }, [isAuthenticated, login]);
+  }, [isAuthenticated, login, isInitialised]);
 
   if (!isAuthenticated()) {
     return <div>Authenticating</div>;

@@ -1,4 +1,3 @@
-import { Button } from '@heroui/button';
 import { Link } from '@heroui/link';
 import {
   Navbar as HeroUINavbar,
@@ -13,12 +12,7 @@ import { link as linkStyles } from '@heroui/theme';
 import clsx from 'clsx';
 
 import { siteConfig } from '@/config/site';
-import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  HeartFilledIcon,
-} from '@/components/icons';
+import { TwitterIcon, GithubIcon, DiscordIcon } from '@/components/icons';
 import { Logo } from '@/components/icons';
 
 export const Navbar = () => {
@@ -67,18 +61,6 @@ export const Navbar = () => {
           <Link isExternal href={siteConfig.links.github} title="GitHub">
             <GithubIcon className="text-default-500" />
           </Link>
-        </NavbarItem>
-        <NavbarItem className="hidden md:flex">
-          <Button
-            isExternal
-            as={Link}
-            className="text-sm font-normal text-default-600 bg-default-100"
-            href={siteConfig.links.sponsor}
-            startContent={<HeartFilledIcon className="text-danger" />}
-            variant="flat"
-          >
-            Sponsor
-          </Button>
         </NavbarItem>
       </NavbarContent>
 

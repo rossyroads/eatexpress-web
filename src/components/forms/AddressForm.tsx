@@ -12,7 +12,7 @@ function AddressForm() {
         }}
         label="Street"
         labelPlacement="outside"
-        name="street"
+        name="address.street"
         placeholder="Enter street name"
       />
       <Input
@@ -27,7 +27,7 @@ function AddressForm() {
         }}
         label="House number"
         labelPlacement="outside"
-        name="street_number"
+        name="address.houseNumber"
         placeholder="Enter house number"
         type="number"
       />
@@ -40,7 +40,7 @@ function AddressForm() {
         }}
         label="Postal code"
         labelPlacement="outside"
-        name="postalCode"
+        name="address.postalCode"
         placeholder="Enter postal code"
       />
       <Input
@@ -52,14 +52,14 @@ function AddressForm() {
         }}
         label="City"
         labelPlacement="outside"
-        name="city"
+        name="address.city"
         placeholder="Enter city"
       />
       <Select
         isRequired
         label="Country"
         labelPlacement="outside"
-        name="country"
+        name="address.country"
         placeholder="Select country"
       >
         <SelectItem key="Belgium">Belgium</SelectItem>

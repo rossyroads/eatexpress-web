@@ -67,10 +67,31 @@ export default function NewRestaurantForm() {
   const [scheduleItems, setScheduleItems] =
     useState<TDailySchedule[]>(scheduleTemplate);
 
+  const nestFormData = (flat: Record<string, FormDataEntryValue>) => {
+    const out: any = {};
+    for (const [k, v] of Object.entries(flat)) {
+      if (k.startsWith('address.')) {
+        out.address = out.address || {};
+        const sub = k.split('.')[1];
+        out.address[sub] = typeof v === 'string' ? v.trim() : v;
+      } else {
+        out[k] = typeof v === 'string' ? v.trim() : v;
+      }
+    }
+    // optional: convert numeric fields
+    if (out.age) out.age = Number(out.age) || undefined;
+    return out;
+  };
+
   // Real-time validation
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    // const data = Object.fromEntries(new FormData(e.currentTarget));
+    const flat = Object.fromEntries(new FormData(e.currentTarget)) as Record<
+      string,
+      FormDataEntryValue
+    >;
+    const data = nestFormData(flat);
     console.log(data);
     // Custom validation checks
     const newErrors: Errors = {};

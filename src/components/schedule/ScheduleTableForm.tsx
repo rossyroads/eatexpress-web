@@ -5,7 +5,6 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Tooltip,
   useDisclosure,
   Skeleton,
 } from '@heroui/react';
@@ -49,13 +48,6 @@ function ScheduleTableForm({
   scheduleItems: TDailySchedule[];
   setScheduleItems: React.Dispatch<React.SetStateAction<TDailySchedule[]>>;
 }) {
-  if (!scheduleItems) {
-    return (
-      <Skeleton className="rounded-lg">
-        <div className="h-10 rounded-lg bg-secondary" />
-      </Skeleton>
-    );
-  }
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [itemOpen, setItemOpen] = useState<TDailySchedule>(scheduleItems[0]);
   const renderCell = useCallback(
@@ -73,27 +65,32 @@ function ScheduleTableForm({
         case 'actions':
           return (
             <div className="relative flex items-center gap-2">
-              <Tooltip content="Edit user">
-                <button
-                  className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log(columnKey);
-                    onOpen();
-                    setItemOpen(item);
-                  }}
-                >
-                  <Edit />
-                </button>
-              </Tooltip>
+              <button
+                className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log(columnKey);
+                  onOpen();
+                  setItemOpen(item);
+                }}
+              >
+                <Edit />
+              </button>
             </div>
           );
         default:
           return cellValue;
       }
     },
-    [setScheduleItems]
+    [onOpen]
   );
+  if (!scheduleItems) {
+    return (
+      <Skeleton className="rounded-lg">
+        <div className="h-10 rounded-lg bg-secondary" />
+      </Skeleton>
+    );
+  }
   return (
     <>
       <div className="flex flex-row text-sm pb-1">
