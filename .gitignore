@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.devcontainer
 .temp
 .pnpm-store
 .env

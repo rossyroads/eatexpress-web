@@ -1,0 +1,33 @@
+name: vsc-eatexpress-web
+services:
+  # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+  # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+  # Dev Container
+  eatexpress-web:
+    container_name: eatexpress-web
+    build:
+      context: .
+      dockerfile: ../Dockerfile
+    # restart: always
+    volumes:
+      - ../..:/workspace:cached
+      - eatexpress-web-nodemodules:/workspace/node_modules
+      - ${HOME}/.ssh:/home/node/.ssh
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    # expose:
+    #   - "2400"
+    # ports:
+    #   - "2400:2400"
+    # network_mode: "host"
+    networks:
+      - backend
+
+volumes:
+  eatexpress-web-nodemodules:
+
+networks:
+  backend:
+    name: back-network
+    driver: bridge
